@@ -61,13 +61,20 @@ function formatDateParts(now = new Date()) {
     month: "2-digit",
     day: "2-digit"
   }).format(now);
+  const generatedAt = new Intl.DateTimeFormat("en-US", {
+    timeZone: "America/New_York",
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true,
+    timeZoneName: "short"
+  }).format(now).replace(" EST", " ET").replace(" EDT", " ET");
 
   return {
     dateISO,
     dayName,
     displayDate,
     editionLabel: `${dayName} Edition`,
-    generatedAt: "08:30 AM ET"
+    generatedAt
   };
 }
 
