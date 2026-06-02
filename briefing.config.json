@@ -1,0 +1,124 @@
+{
+  "brand": "SecOwl Inc.",
+  "briefingName": "Intelligence Briefing",
+  "timezone": "America/New_York",
+  "targetStoriesPerSection": 5,
+  "maxStoriesPerSection": 8,
+  "emptySectionMessage": "No new reportable events for today's briefing.",
+  "searchWindow": "Search for new developments from the last 24 hours first. If a section has fewer than five strong items, expand to the last seven days. Do not include weak or unrelated filler.",
+  "sections": [
+    {
+      "id": "workplace-violence",
+      "className": "section--violence",
+      "statClass": "stat-tab--violence",
+      "tocColor": "var(--c-violence)",
+      "title": "Healthcare Workplace Violence",
+      "shortLabel": "Healthcare Violence",
+      "subtitle": "Patients, visitors, employees · ED, behavioral health, nursing homes, home health",
+      "focus": "Workplace violence in healthcare settings involving visitors, patients, employees, clinical staff, security staff, emergency departments, behavioral health, nursing homes, home health, and hospital campuses.",
+      "preferredSources": [
+        "osha.gov",
+        "cdc.gov/niosh",
+        "aha.org",
+        "jointcommission.org",
+        "beckershospitalreview.com",
+        "modernhealthcare.com",
+        "campussafetymagazine.com"
+      ]
+    },
+    {
+      "id": "hipaa",
+      "className": "section--hipaa",
+      "statClass": "stat-tab--hipaa",
+      "tocColor": "var(--c-hipaa)",
+      "title": "HIPAA / Privacy Enforcement",
+      "shortLabel": "HIPAA / Privacy",
+      "subtitle": "Rule changes · OCR cases · settlements · state health privacy laws",
+      "focus": "HIPAA rule changes, HHS OCR enforcement, health privacy settlements, healthcare data privacy lawsuits, state privacy laws affecting health information, and major healthcare privacy cases.",
+      "preferredSources": [
+        "hhs.gov/ocr",
+        "hhs.gov/hipaa",
+        "federalregister.gov",
+        "justice.gov",
+        "ftc.gov",
+        "healthitsecurity.com"
+      ]
+    },
+    {
+      "id": "lawsuits",
+      "className": "section--legal",
+      "statClass": "stat-tab--legal",
+      "tocColor": "var(--c-legal)",
+      "title": "Healthcare Violence Law & Regulation",
+      "shortLabel": "Violence Law & Regulation",
+      "subtitle": "OSHA activity · lawsuits · bills · staffing/security mandates · union actions",
+      "focus": "Regulatory, legal, legislative, lawsuit, OSHA, state agency, staffing, security mandate, union, and compliance developments tied to workplace violence prevention in healthcare.",
+      "preferredSources": [
+        "osha.gov",
+        "congress.gov",
+        "federalregister.gov",
+        "nga.org",
+        "aha.org",
+        "nursingworld.org",
+        "nationalnursesunited.org"
+      ]
+    },
+    {
+      "id": "guard-industry",
+      "className": "section--breach",
+      "statClass": "stat-tab--breach",
+      "tocColor": "var(--c-breach)",
+      "title": "Healthcare & University Security Guard Industry",
+      "shortLabel": "Guard Industry",
+      "subtitle": "Staffing · licensing · training · de-escalation · use of force · contract trends",
+      "focus": "Security guard industry developments for healthcare and universities, including contracting, licensing, pay, training, de-escalation, use-of-force policy, staffing shortages, campus safety, and hospital security operations.",
+      "preferredSources": [
+        "securityindustry.org",
+        "asisonline.org",
+        "campussafetymagazine.com",
+        "iaclea.org",
+        "iahssf.org",
+        "securitymagazine.com"
+      ]
+    },
+    {
+      "id": "best-practices",
+      "className": "section--security",
+      "statClass": "stat-tab--security",
+      "tocColor": "var(--c-security)",
+      "title": "Security Best Practices & Trends",
+      "shortLabel": "Best Practices & Trends",
+      "subtitle": "Visitor management · weapons screening · panic buttons · body cameras · AI video analytics",
+      "focus": "Best practices and hot topics in healthcare and university security, including visitor management, weapons detection, duress alerts, panic buttons, body cameras, video analytics, reporting, training, and security technology governance.",
+      "preferredSources": [
+        "jointcommission.org",
+        "iahssf.org",
+        "campussafetymagazine.com",
+        "securitymagazine.com",
+        "asisonline.org",
+        "nist.gov"
+      ]
+    },
+    {
+      "id": "human-trafficking",
+      "className": "section--trafficking",
+      "statClass": "stat-tab--trafficking",
+      "tocColor": "var(--c-trafficking)",
+      "title": "Human Trafficking Intelligence",
+      "shortLabel": "Human Trafficking",
+      "subtitle": "US focus · sex & labor trafficking · healthcare, universities, hotels, cases, laws, findings",
+      "focus": "Human trafficking intelligence with U.S. focus and major international items only when relevant to U.S. enforcement, policy, travel, supply chains, or investigations. Cover sex trafficking and labor trafficking, criminal cases, civil lawsuits, legislation, task force findings, hotels and hospitality, healthcare victim identification, university/campus activity, and investigator best practices.",
+      "includeTrendWatch": true,
+      "preferredSources": [
+        "justice.gov",
+        "dhs.gov/blue-campaign",
+        "acf.hhs.gov/otip",
+        "humantraffickinghotline.org",
+        "state.gov",
+        "unodc.org",
+        "fbi.gov",
+        "ny.gov"
+      ]
+    }
+  ]
+}

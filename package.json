@@ -1,0 +1,10 @@
+{
+  "name": "secowl-intelligence-briefing",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "generate": "node scripts/generate-briefing.mjs",
+    "check": "node --check scripts/generate-briefing.mjs"
+  }
+}
