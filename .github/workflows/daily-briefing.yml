@@ -3,7 +3,9 @@ name: Daily SecOwl Intelligence Briefing
 on:
   workflow_dispatch:
   schedule:
-    - cron: "30 12 * * *"
+    # GitHub uses UTC. This is 8:37 AM Eastern during daylight saving time.
+    # Using :37 helps avoid the busiest exact hour/half-hour schedule windows.
+    - cron: "37 12 * * *"
 
 permissions:
   contents: write
