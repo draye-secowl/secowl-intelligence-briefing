@@ -3,9 +3,10 @@ name: Daily SecOwl Intelligence Briefing
 on:
   workflow_dispatch:
   schedule:
-    # GitHub uses UTC. This is 8:37 AM Eastern during daylight saving time.
-    # Using :37 helps avoid the busiest exact hour/half-hour schedule windows.
-    - cron: "37 12 * * *"
+    # GitHub uses UTC. This is 7:00 AM Eastern during daylight saving time.
+    - cron: "0 11 * * *"
+    # Backup run at 7:30 AM Eastern. It skips if today's briefing already exists.
+    - cron: "30 11 * * *"
 
 permissions:
   contents: write
@@ -26,13 +27,29 @@ jobs:
       - name: Check generator script
         run: npm run check
 
+      - name: Check whether today's briefing already exists
+        id: briefing_date
+        shell: bash
+        run: |
+          today="$(TZ=America/New_York date +%F)"
+          echo "date=$today" >> "$GITHUB_OUTPUT"
+
+          if [[ "${{ github.event_name }}" == "schedule" && -f "briefings/$today.html" ]]; then
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+            echo "Briefing already exists for $today. Skipping scheduled backup run."
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Generate briefing
+        if: steps.briefing_date.outputs.skip != 'true'
         run: npm run generate
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           OPENAI_MODEL: ${{ vars.OPENAI_MODEL || 'gpt-5' }}
 
       - name: Commit updated briefing
+        if: steps.briefing_date.outputs.skip != 'true'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
