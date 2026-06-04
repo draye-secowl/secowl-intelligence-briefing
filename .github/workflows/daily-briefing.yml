@@ -3,9 +3,10 @@ name: Daily SecOwl Intelligence Briefing
 on:
   workflow_dispatch:
   schedule:
-    # Temporary schedule test. Runs every 5 minutes until we confirm GitHub is triggering schedules.
-    # The job skips if today's briefing already exists, so this should not spend API money repeatedly.
-    - cron: "*/5 * * * *"
+    # GitHub uses UTC. This is 7:00 AM Eastern during daylight saving time.
+    - cron: "0 11 * * *"
+    # Backup run at 7:30 AM Eastern. It skips if today's briefing already exists.
+    - cron: "30 11 * * *"
 
 permissions:
   contents: write
