@@ -3,10 +3,8 @@ name: Daily SecOwl Intelligence Briefing
 on:
   workflow_dispatch:
   schedule:
-    # GitHub uses UTC. This is 7:00 AM Eastern during daylight saving time.
-    - cron: "0 11 * * *"
-    # Backup run at 7:30 AM Eastern. It skips if today's briefing already exists.
-    - cron: "30 11 * * *"
+  # GitHub uses UTC. This is 8:30 AM Eastern during daylight saving time.
+  - cron: "30 12 * * *"
 
 permissions:
   contents: write
