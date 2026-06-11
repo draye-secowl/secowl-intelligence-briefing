@@ -1,9 +1,12 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SecOwl Intelligence Briefing — June 11, 2026</title>
+<title>SecOwl Intelligence Briefing — June 10, 2026</title>
+<meta name="description" content="Daily healthcare security intelligence briefing: workplace violence, HIPAA and privacy enforcement, violence law and regulation, the security guard industry, best practices, and human trafficking.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='5' fill='%23990000'/%3E%3Ccircle cx='8.5' cy='10' r='2.4' fill='%23F5F5F5'/%3E%3Ccircle cx='15.5' cy='10' r='2.4' fill='%23F5F5F5'/%3E%3Ccircle cx='8.5' cy='10' r='1.1' fill='%23101010'/%3E%3Ccircle cx='15.5' cy='10' r='1.1' fill='%23101010'/%3E%3Cpath d='M12 12.6l-1.7 2.4h3.4z' fill='%23F5F5F5'/%3E%3C/svg%3E">
 <script>
   (function () {
     const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
@@ -19,7 +22,8 @@
   })();
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
 <style>
   /* ============================================================
      DESIGN TOKENS
@@ -52,12 +56,26 @@
     --brand-gradient-end: #D52027;
 
     /* Section accent colors */
-    --c-violence: #D52027;      /* bright red */
-    --c-hipaa:    #00549A;      /* royal blue */
-    --c-legal:    #BA7517;      /* amber      */
-    --c-breach:   #1791AD;      /* turquoise  */
-    --c-security: #104247;      /* forest teal*/
-    --c-trafficking: #990000;   /* primary red*/
+    /* Accents brightened for dark surfaces — all >=4.5:1 on #181818 and #242424 */
+    --c-violence: #F2666C;      /* red        — 5.8:1 */
+    --c-hipaa:    #4FA3E8;      /* blue       — 6.5:1 */
+    --c-legal:    #D6953A;      /* amber      — 7.0:1 */
+    --c-breach:   #3FB6CF;      /* turquoise  — 7.4:1 */
+    --c-security: #4FB3A6;      /* teal       — 7.0:1 */
+    --c-trafficking: #E66060;   /* deep red   — 5.3:1 */
+
+    --tag-new-bg: rgba(23,145,173,0.16);
+    --tag-new-fg: #3FB6CF;
+    --tag-new-border: rgba(63,182,207,0.45);
+    --tag-update-bg: rgba(186,117,23,0.16);
+    --tag-update-fg: #D6953A;
+    --tag-update-border: rgba(214,149,58,0.45);
+    --tag-critical-bg: rgba(213,32,39,0.16);
+    --tag-critical-fg: #F2666C;
+    --tag-critical-border: rgba(242,102,108,0.5);
+    --tag-watch-bg: rgba(77,159,232,0.14);
+    --tag-watch-fg: #5FA8EC;
+    --tag-watch-border: rgba(95,168,236,0.45);
 
     --c-violence-bg: rgba(213,32,39,0.14);
     --c-hipaa-bg:    rgba(0,84,154,0.16);
@@ -107,6 +125,19 @@
     --c-security: #104247;
     --c-trafficking: #D52027;
 
+    --tag-new-bg: #F0FAF5;
+    --tag-new-fg: #104247;
+    --tag-new-border: #1791AD;
+    --tag-update-bg: #FFF8E0;
+    --tag-update-fg: #633806;
+    --tag-update-border: #BA7517;
+    --tag-critical-bg: #FFF0F0;
+    --tag-critical-fg: #6B000D;
+    --tag-critical-border: #990000;
+    --tag-watch-bg: #F0F8FF;
+    --tag-watch-fg: #002244;
+    --tag-watch-border: #00549A;
+
     --c-violence-bg: #FFF0F0;
     --c-hipaa-bg:    #F0F8FF;
     --c-legal-bg:    #FFF8E0;
@@ -121,6 +152,7 @@
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 74px; /* keeps anchor targets clear of the sticky header */
     background: var(--bg);
   }
   body {
@@ -139,6 +171,20 @@
     outline: 3px solid var(--focus);
     outline-offset: 3px;
   }
+  .skip-link {
+    position: absolute;
+    top: -100px;
+    left: 16px;
+    z-index: 300;
+    background: var(--surface);
+    color: var(--text);
+    border: 1px solid var(--border3);
+    border-radius: 0 0 var(--radius-md) var(--radius-md);
+    padding: 10px 16px;
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .skip-link:focus { top: 0; }
 
   /* ============================================================
      HEADER
@@ -538,10 +584,10 @@
     text-transform: uppercase;
     line-height: 1.4;
   }
-  .tag--new      { background: #F0FAF5; color: #104247; border: 1px solid #1791AD; }
-  .tag--update   { background: #FFF8E0; color: #633806; border: 1px solid #BA7517; }
-  .tag--critical { background: #FFF0F0; color: #6B000D; border: 1px solid #990000; }
-  .tag--watch    { background: #F0F8FF; color: #002244; border: 1px solid #00549A; }
+  .tag--new      { background: var(--tag-new-bg);      color: var(--tag-new-fg);      border: 1px solid var(--tag-new-border); }
+  .tag--update   { background: var(--tag-update-bg);   color: var(--tag-update-fg);   border: 1px solid var(--tag-update-border); }
+  .tag--critical { background: var(--tag-critical-bg); color: var(--tag-critical-fg); border: 1px solid var(--tag-critical-border); }
+  .tag--watch    { background: var(--tag-watch-bg);    color: var(--tag-watch-fg);    border: 1px solid var(--tag-watch-border); }
 
   .story__source {
     font-size: 11.5px;
@@ -671,7 +717,7 @@
   .trend-bar__fill {
     display: block;
     height: 100%;
-    width: var(--bar-value);
+    width: var(--bar-value, 0%);
     background: var(--c-trafficking);
     border-radius: inherit;
   }
@@ -815,7 +861,6 @@
      ============================================================ */
   @media print {
     @page {
-      size: Letter;
       margin: 0.55in 0.62in 0.6in;
     }
 
@@ -832,6 +877,7 @@
       line-height: 1.45;
     }
 
+    .skip-link,
     .theme-toggle,
     .btn-print,
     .pill--live,
@@ -1002,6 +1048,10 @@
       font-size: 7pt;
       padding: 1px 6px;
     }
+    .tag--new      { color: #104247 !important; }
+    .tag--update   { color: #633806 !important; }
+    .tag--critical { color: #6B000D !important; }
+    .tag--watch    { color: #002244 !important; }
     .story__source,
     .story__time {
       color: #828282 !important;
@@ -1043,6 +1093,7 @@
     .source-link[href^="http"]::after {
       content: " (" attr(href) ")";
       color: #828282;
+      word-break: break-all;
     }
 
     .trend-watch {
@@ -1124,11 +1175,18 @@
     .layout { grid-template-columns: 1fr; }
     .sidebar { position: static; }
     .stats-nav__inner { grid-template-columns: repeat(3, 1fr); }
+    .stat-tab:nth-child(-n+3) { border-bottom: 1px solid var(--border); }
+    .stat-tab:nth-child(3n) { border-right: none; }
     .trend-grid { grid-template-columns: 1fr; }
     .hero__headline { font-size: 26px; }
   }
   @media (max-width: 600px) {
     .stats-nav__inner { grid-template-columns: repeat(2, 1fr); }
+    .stat-tab:nth-child(odd) { border-right: 1px solid var(--border); }
+    .stat-tab:nth-child(even) { border-right: none; }
+    .stat-tab:nth-child(-n+4) { border-bottom: 1px solid var(--border); }
+    .stat-tab:nth-child(n+5) { border-bottom: none; }
+    .hero__headline br { display: none; }
     .site-header__inner { padding: 0 1rem; }
     .layout, .hero { padding-left: 1rem; padding-right: 1rem; }
     .header-actions { gap: 8px; }
@@ -1138,9 +1196,20 @@
     .brand__name { font-size: 13px; }
     .brand__tagline { font-size: 10px; }
   }
+
+  /* ============================================================
+     REDUCED MOTION
+     ============================================================ */
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .pill--live .pulse { animation: none; }
+    *, *::before, *::after { transition: none !important; }
+  }
 </style>
 </head>
 <body>
+
+<a class="skip-link" href="#main-content">Skip to briefing content</a>
 
 <!-- ============================================================
      HEADER
@@ -1150,7 +1219,7 @@
 
     <div class="brand">
       <div class="brand__mark" aria-hidden="true">
-        <img src="secowl-mark-transparent.png" alt="">
+        <img src="secowl-mark-transparent.png" alt="" onerror="this.parentElement.style.display='none'">
       </div>
       <div>
         <div class="brand__name">SecOwl Inc.</div>
@@ -1163,8 +1232,8 @@
         <div class="pulse"></div>
         Live Edition
       </div>
-      <div class="pill">Thursday, June 11, 2026 · 2:38 PM ET</div>
-      <button class="theme-toggle" type="button" aria-label="Switch to light mode" aria-pressed="false" title="Toggle color theme">
+      <div class="pill">Wednesday, June 10, 2026 · 2:16 PM ET</div>
+      <button class="theme-toggle" type="button" aria-label="Switch to light mode" title="Toggle color theme">
         <svg class="theme-toggle__sun" viewBox="0 0 24 24" stroke-width="2" aria-hidden="true">
           <circle cx="12" cy="12" r="4"/>
           <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
@@ -1173,7 +1242,7 @@
           <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
         </svg>
       </button>
-      <button class="btn-print" type="button" id="print-button">
+      <button class="btn-print" type="button" id="print-button" aria-label="Print / Save PDF">
         <svg viewBox="0 0 24 24" stroke-width="2.2" aria-hidden="true">
           <polyline points="6 9 6 2 18 2 18 9"/>
           <path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/>
@@ -1194,19 +1263,19 @@
   <div class="hero__inner">
     <div class="edition-badge">
       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-      Thursday Edition
+      Wednesday Edition
     </div>
     <h1 class="hero__headline">
-      Good morning. Here is your<br>
+      Good afternoon. Here is your<br>
       <em>Healthcare Executive Briefing</em><br>
-      for June 11, 2026.
+      for June 10, 2026.
     </h1>
     <div class="hero__meta">
-      <span class="hero__meta-item"><strong>17</strong> stories monitored</span>
+      <span class="hero__meta-item"><strong>15</strong> stories monitored</span>
       <span class="hero__meta-item"><strong>6</strong> coverage areas</span>
-      <span class="hero__meta-item"><strong>3</strong> critical alerts</span>
-      <span class="hero__meta-item"><strong>7</strong> story updates</span>
-      <span class="hero__meta-item">Generated 2:38 PM ET</span>
+      <span class="hero__meta-item"><strong>1</strong> critical alert</span>
+      <span class="hero__meta-item"><strong>6</strong> story updates</span>
+      <span class="hero__meta-item">Generated 2:16 PM ET</span>
     </div>
   </div>
 </section>
@@ -1222,15 +1291,15 @@
       <div class="stat-tab__label">Healthcare Violence</div>
     </a>
     <a href="#hipaa" class="stat-tab stat-tab--hipaa">
-      <div class="stat-tab__num">2</div>
+      <div class="stat-tab__num">0</div>
       <div class="stat-tab__label">HIPAA / Privacy</div>
     </a>
     <a href="#lawsuits" class="stat-tab stat-tab--legal">
-      <div class="stat-tab__num">0</div>
+      <div class="stat-tab__num">4</div>
       <div class="stat-tab__label">Violence Law &amp; Regulation</div>
     </a>
     <a href="#guard-industry" class="stat-tab stat-tab--breach">
-      <div class="stat-tab__num">5</div>
+      <div class="stat-tab__num">0</div>
       <div class="stat-tab__label">Guard Industry</div>
     </a>
     <a href="#best-practices" class="stat-tab stat-tab--security">
@@ -1238,7 +1307,7 @@
       <div class="stat-tab__label">Best Practices &amp; Trends</div>
     </a>
     <a href="#human-trafficking" class="stat-tab stat-tab--trafficking">
-      <div class="stat-tab__num">5</div>
+      <div class="stat-tab__num">6</div>
       <div class="stat-tab__label">Human Trafficking</div>
     </a>
   </div>
@@ -1248,16 +1317,16 @@
 <!-- ============================================================
      MAIN CONTENT + SIDEBAR
      ============================================================ -->
-<main class="layout" data-section-target-stories="5" data-section-max-stories="8" data-empty-section-message="No new reportable events for today&#39;s briefing.">
+<main class="layout" id="main-content">
   <div class="content-col">
-    <article class="section-card section--violence" id="workplace-violence" data-target-stories="5" data-max-stories="8" data-empty-message="No new reportable events for today&#39;s briefing.">
+    <article class="section-card section--violence" id="workplace-violence">
       <div class="section-head">
         <div class="section-head__bar"></div>
         <div class="section-head__icon">
           <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         </div>
         <div class="section-head__text">
-          <div class="section-head__title">Healthcare Workplace Violence</div>
+          <h2 class="section-head__title">Healthcare Workplace Violence</h2>
           <div class="section-head__sub">Patients, visitors, employees · ED, behavioral health, nursing homes, home health</div>
         </div>
         <div class="section-head__count">5 stories</div>
@@ -1266,67 +1335,50 @@
       
       <div class="story">
         <div class="story__meta">
-          <span class="tag tag--new">New</span>
-          <span class="story__source">San Francisco Chronicle</span>
-          <span class="story__time">2 days ago</span>
+          <span class="tag tag--critical">Critical</span>
+          <span class="story__source">KQED</span>
+          <span class="story__time">June 8, 2026</span>
         </div>
-        <h2 class="story__title">Cal/OSHA issues hefty fine to UCSF/Zuckerberg SF General after fatal workplace stabbing</h2>
-        <p class="story__body">California regulators cited UCSF and San Francisco’s public hospital for failing to maintain an effective workplace violence prevention plan following the December 2025 fatal stabbing of a hospital social worker. The findings reference deficiencies that frontline staff and unions have warned about, and arrive as facilities reassess security controls, patient management protocols, and coordination with law enforcement. For security and compliance leaders, this is a concrete signal that state OSHA agencies are scrutinizing violence-prevention programs and will levy significant penalties when plans are deficient or not implemented. Hospital administrators should expect enforcement attention on risk assessments, staffing, incident reporting, and corrective actions—especially in emergency and behavioral health areas and mixed-use hospital campuses.</p>
+        <h3 class="story__title">Cal/OSHA fines San Francisco General and UCSF over fatal clinic stabbing, cites WPV plan gaps</h3>
+        <p class="story__body">California OSHA issued $130,500 in fines to Zuckerberg San Francisco General Hospital and $142,700 to UCSF following the December 2025 fatal stabbing of a social worker at Ward 86. Inspectors cited missing or insufficient workplace violence prevention measures, including failure to develop a safety plan after threats, inadequate staff notifications, and lack of cameras or weapons screening. The report notes delayed reporting to Cal/OSHA and deficiencies in violent-incident logs. City officials say they’ve added security staff, created a threat management team, and installed metal detectors; the city also committed new funding for safety upgrades. Why it matters: compliance, security, and risk leaders should review WPV programs against Cal/OSHA and Joint Commission requirements, validate incident logging/notification workflows, and close ED/clinic access-control gaps quickly.</p>
         <div class="story__footer">
           <span class="cross-ref">
             <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
-            Also relevant to: compliance, investigations
+            Also relevant to: compliance, campus-security, investigations
           </span>
-          <a href="https://www.sfchronicle.com/sf/article/hospital-worker-stabbing-ucsf-fine-22297596.php" class="source-link" target="_blank" rel="noopener noreferrer">Read source <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+          <a href="https://www.kqed.org/news/12086556/san-francisco-general-hospital-fined-for-serious-safety-violations-after-social-worker-stabbing" class="source-link" target="_blank" rel="noopener noreferrer">Read source <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
         </div>
       </div>
 
       <div class="story">
         <div class="story__meta">
           <span class="tag tag--new">New</span>
-          <span class="story__source">NBC Bay Area</span>
-          <span class="story__time">3 days ago</span>
+          <span class="story__source">ABC News</span>
+          <span class="story__time">June 8, 2026</span>
         </div>
-        <h2 class="story__title">Shooting outside Kaiser medical office leaves employee wounded; suspect later dies</h2>
-        <p class="story__body">San José police say a man and a Kaiser Permanente employee were shot outside a Kaiser medical office campus on June 8. The suspect later died at a local hospital. Although the incident occurred outside clinical space, it underscores that violence can originate in parking lots and public approaches, then spill into care operations. For hospital security and emergency management teams, the case reinforces the need for exterior threat monitoring, camera coverage, employee escort options, and rapid lockdown/notification capabilities across satellite clinics and medical office buildings. It also highlights the importance of coordinating with local police on campus perimeters, evidence handling, and post-incident staff care and communications.</p>
+        <h3 class="story__title">Two shot at Kaiser medical offices in San Jose; police say incident was isolated</h3>
+        <p class="story__body">San Jose police reported a man and a woman suffered life-threatening injuries in a shooting at Kaiser medical offices. Authorities emphasized there was no ongoing public threat and treated the event as isolated. While not inside a hospital, medical office buildings are part of many systems’ care campuses and often share staff, patients, and entrances with urgent and specialty services. Why it matters: hospital and health system security teams should revisit campus-wide risk assessments, medical office building access control, camera coverage, and response coordination with local police. Communications teams should check lockdown and mass-notification playbooks for off-site clinics to prevent confusion during fast-moving incidents.</p>
         <div class="story__footer">
           <span class="cross-ref">
             <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
-            Also relevant to: security, campus-safety
+            Also relevant to: campus-security, emergency-operations
           </span>
-          <a href="https://www.nbcbayarea.com/news/local/man-woman-shot-san-jose/4096021/" class="source-link" target="_blank" rel="noopener noreferrer">Read source <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+          <a href="https://abcnews.go.com/US/2-shot-kaiser-medical-offices-california-police/story?id=133690440" class="source-link" target="_blank" rel="noopener noreferrer">Read source <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
         </div>
       </div>
 
       <div class="story">
         <div class="story__meta">
-          <span class="tag tag--update">Update</span>
-          <span class="story__source">AHA News</span>
-          <span class="story__time">6-7 days ago</span>
+          <span class="tag tag--new">New</span>
+          <span class="story__source">ABC17 News (KMIZ)</span>
+          <span class="story__time">June 9, 2026</span>
         </div>
-        <h2 class="story__title">AHA’s 10th #HAVhope Day spotlights prevention efforts, urges action on Save Healthcare Workers Act</h2>
-        <p class="story__body">The American Hospital Association marked the 10th #HAVhope National Day of Awareness on June 5, highlighting practical prevention steps hospitals are adopting—buddy systems, stronger ties with public safety, and structured incident response—while pressing Congress to pass the bipartisan Save Healthcare Workers Act. For compliance, policy, and leadership teams, #HAVhope consolidates proven approaches into a framework that aligns risk mitigation, trauma support, culture of safety, and violence intervention. It also signals a growing federal policy push to elevate penalties for assaults on hospital workers. Security programs can leverage the AHA toolkit to benchmark current controls and strengthen coordination with clinical leaders and community partners.</p>
+        <h3 class="story__title">Travel nurse charged with sexually assaulting ER patient at Missouri hospital</h3>
+        <p class="story__body">A 42-year-old traveling nurse was charged in Phelps County, Missouri, with first-degree rape, sodomy, and sexual abuse after an alleged assault of an intoxicated female patient in Phelps Health’s emergency department. Court documents say security video captured the assault. Why it matters: this is an insider-threat case in a high-risk care area with major implications for patient safety, HIPAA/privacy, credentialing, background screening, siting of cameras and chaperone policies, and rapid evidence preservation. Security, compliance, HR, and legal teams should verify ER observation/duress coverage, escort and chaperone practices for vulnerable patients, reporting pathways to law enforcement and licensing boards, and chain-of-custody procedures for video and access-control logs.</p>
         <div class="story__footer">
           <span class="cross-ref">
             <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
-            Also relevant to: policy, workforce-safety
-          </span>
-          <a href="https://www.aha.org/news/headline/2026-06-05-ahas-10th-annual-havhope-friday-calls-workplace-violence-prevention-and-safer-work-environment" class="source-link" target="_blank" rel="noopener noreferrer">Read source <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
-        </div>
-      </div>
-
-      <div class="story">
-        <div class="story__meta">
-          <span class="tag tag--watch">Watch</span>
-          <span class="story__source">ABC 17 News (KMIZ)</span>
-          <span class="story__time">2 days ago</span>
-        </div>
-        <h2 class="story__title">Travel nurse charged with sexual assault of patient in Missouri ER</h2>
-        <p class="story__body">Prosecutors charged a traveling nurse with sexually assaulting a patient inside the Phelps Health emergency department in Rolla, Missouri. While distinct from visitor or patient-on-staff assaults, the case highlights insider risk within clinical environments and the importance of surveillance, chaperone policies during sensitive exams, rapid reporting pathways, and coordination with law enforcement. For investigators and HR, it underscores credentialing and traveler onboarding due diligence, auditing of badge access and video coverage in high‑risk areas, and victim support protocols. Security leaders should review how privacy protections intersect with real‑time monitoring and ensure incident response plans cover alleged staff‑on‑patient crimes to protect patients and preserve evidence.</p>
-        <div class="story__footer">
-          <span class="cross-ref">
-            <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
-            Also relevant to: investigations, privacy
+            Also relevant to: privacy, investigations, compliance
           </span>
           <a href="https://abc17news.com/news/crime/2026/06/09/nurse-charged-with-sexual-assault-at-rolla-hospital/" class="source-link" target="_blank" rel="noopener noreferrer">Read source <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
         </div>
@@ -1334,74 +1386,48 @@
 
       <div class="story">
         <div class="story__meta">
-          <span class="tag tag--update">Update</span>
-          <span class="story__source">AHA</span>
-          <span class="story__time">1 week ago</span>
+          <span class="tag tag--new">New</span>
+          <span class="story__source">ClickOnDetroit (WDIV Local 4)</span>
+          <span class="story__time">June 3, 2026</span>
         </div>
-        <h2 class="story__title">AHA amplifies hospital violence-prevention framework and calls for federal protections</h2>
-        <p class="story__body">Ahead of #HAVhope Day, the American Hospital Association reiterated its four‑domain framework—risk mitigation, trauma support, culture of safety, and violence intervention—and encouraged members to advocate for the Save Healthcare Workers Act, which would establish federal penalties for assaults on hospital workers. For compliance, campus safety, and executive teams, this provides a reference architecture to align security technology (duress alarms, access control), staffing, training, and post‑incident care across hospital campuses, EDs, behavioral health units, and ambulatory sites. It also signals continued momentum for federal action, suggesting organizations should assess policy gaps, data collection and reporting maturity, and how their programs map to emerging national expectations.</p>
+        <h3 class="story__title">Gun pulled on 3 Henry Ford Warren Hospital workers outside ER; suspect arrested</h3>
+        <p class="story__body">Three overnight-shift employees at Henry Ford Warren Hospital reported that a man approached them outside the building, pointed a gun, and threatened them before fleeing. The hospital briefly locked down; police later arrested a 31-year-old suspect and recovered a firearm. Some staff voiced concerns about the immediate response. Why it matters: off-shift staff areas and exterior perimeters are frequent blind spots. Security leaders should assess lighting, camera coverage, patrols, employee safe-walk/escorts, panic/duress options, and procedures for rapid lockdown and radio/dispatch coordination. HR and security should reinforce guidance on breaks and designated safe areas, and review threat connections to domestic/relationship issues that can spill over at healthcare campuses.</p>
         <div class="story__footer">
           <span class="cross-ref">
             <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
-            Also relevant to: policy, workforce-safety
+            Also relevant to: campus-security, emergency-operations
           </span>
-          <a href="https://www.aha.org/hospitals-against-violence" class="source-link" target="_blank" rel="noopener noreferrer">Read source <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+          <a href="https://www.clickondetroit.com/news/local/2026/06/03/gun-pulled-on-3-warren-hospital-workers-while-they-took-break-sources-say/" class="source-link" target="_blank" rel="noopener noreferrer">Read source <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+        </div>
+      </div>
+
+      <div class="story">
+        <div class="story__meta">
+          <span class="tag tag--update">Update</span>
+          <span class="story__source">American Hospital Association (AHA News)</span>
+          <span class="story__time">June 4, 2026</span>
+        </div>
+        <h3 class="story__title">AHA marks 10th #HAVhope Day; highlights tools and advocacy to combat hospital workplace violence</h3>
+        <p class="story__body">Ahead of the 10th annual #HAVhope Day (June 5), the AHA spotlighted resources and an awareness toolkit to help hospitals strengthen workplace and community violence prevention. The campaign underscores leadership frameworks for risk mitigation, trauma support, and cultures of safety, and continues advocacy for federal protections for hospital workers akin to aviation worker safeguards. Why it matters: security and compliance teams can leverage the toolkit to brief executives, refresh policies and training, and align programs with Joint Commission standards. It’s also a timely hook for workforce engagement, reporting culture resets, and community law-enforcement partnership drills as EDs and behavioral health units continue to face elevated aggression.</p>
+        <div class="story__footer">
+          <span class="cross-ref">
+            <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
+            Also relevant to: compliance, training
+          </span>
+          <a href="https://www.aha.org/news/headline/2026-06-04-aha-mark-10th-havhope-national-day-awareness" class="source-link" target="_blank" rel="noopener noreferrer">Read source <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
         </div>
       </div>
     </article>
 
-    <article class="section-card section--hipaa" id="hipaa" data-target-stories="5" data-max-stories="8" data-empty-message="No new reportable events for today&#39;s briefing.">
+    <article class="section-card section--hipaa" id="hipaa">
       <div class="section-head">
         <div class="section-head__bar"></div>
         <div class="section-head__icon">
           <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
         </div>
         <div class="section-head__text">
-          <div class="section-head__title">HIPAA / Privacy Enforcement</div>
+          <h2 class="section-head__title">HIPAA / Privacy Enforcement</h2>
           <div class="section-head__sub">Rule changes · OCR cases · settlements · state health privacy laws</div>
-        </div>
-        <div class="section-head__count">2 stories</div>
-      </div>
-
-      
-      <div class="story">
-        <div class="story__meta">
-          <span class="tag tag--new">New</span>
-          <span class="story__source">Federal Trade Commission</span>
-          <span class="story__time">June 5, 2026</span>
-        </div>
-        <h2 class="story__title">FTC finalizes order against Illuminate Education over data security failures that exposed student records, including health-related information</h2>
-        <p class="story__body">The FTC gave final approval to a modified order requiring Illuminate Education to overhaul its security program, restrict data collection/retention, follow a public retention schedule, and notify the FTC when certain breaches are reported elsewhere. The agency alleged Illuminate failed to implement reasonable safeguards, leading to a breach that exposed personal data for 10.1 million students, including health-related information. For security and compliance leaders in K–12, higher education, and health-adjacent edtech, this underscores that even non‑HIPAA entities face federal privacy/security enforcement when handling sensitive health data. Expect greater scrutiny of cloud database controls, breach notification timeliness, and data minimization commitments made in privacy policies and contracts.</p>
-        <div class="story__footer">
-          <span></span>
-          <a href="https://www.ftc.gov/news-events/news/press-releases/2026/06/ftc-gives-final-approval-order-against-illuminate-settling-allegations-it-failed-secure-students" class="source-link" target="_blank" rel="noopener noreferrer">Read source <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
-        </div>
-      </div>
-
-      <div class="story">
-        <div class="story__meta">
-          <span class="tag tag--watch">Watch</span>
-          <span class="story__source">U.S. District Court, District of Minnesota (via Justia Dockets)</span>
-          <span class="story__time">June 9, 2026</span>
-        </div>
-        <h2 class="story__title">Change Healthcare cyberattack litigation: related case transferred into federal MDL</h2>
-        <p class="story__body">A newly filed case (Sunny Days Therapeutics LLC v. UnitedHealth Group et al.) was transferred on June 9 into the federal proceedings consolidated around the Change Healthcare cyber incident. While procedural, the transfer signals continuing expansion and coordination of claims alleging harm from the breach. For healthcare, payer, and vendor legal/compliance teams, the MDL’s growth raises discovery, data preservation, and insurance‑coverage stakes. Security leaders should anticipate court‑driven scrutiny of incident response timelines, vendor risk management, and safeguards protecting PHI and payment data. Universities running health systems or clinics should review contracts and indemnities with revenue cycle and clearinghouse vendors as litigation contours evolve.</p>
-        <div class="story__footer">
-          <span></span>
-          <a href="https://dockets.justia.com/docket/minnesota/mndce/0%3A2026cv02889/234358" class="source-link" target="_blank" rel="noopener noreferrer">Read source <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
-        </div>
-      </div>
-    </article>
-
-    <article class="section-card section--legal" id="lawsuits" data-target-stories="5" data-max-stories="8" data-empty-message="No new reportable events for today&#39;s briefing.">
-      <div class="section-head">
-        <div class="section-head__bar"></div>
-        <div class="section-head__icon">
-          <svg viewBox="0 0 24 24"><path d="M12 3v18M8 6l-4 6h8zm8 0l-4 6h8zM3 17h7m4 0h7"/></svg>
-        </div>
-        <div class="section-head__text">
-          <div class="section-head__title">Healthcare Violence Law &amp; Regulation</div>
-          <div class="section-head__sub">OSHA activity · lawsuits · bills · staffing/security mandates · union actions</div>
         </div>
         <div class="section-head__count">0 stories</div>
       </div>
@@ -1409,36 +1435,36 @@
       
       <div class="empty-state">
         <strong>No new reportable events</strong>
-        <span>No new reportable events for today&#39;s briefing.</span>
+        <span>Nothing in this coverage area met today&#39;s inclusion criteria. Monitoring continues for the next edition.</span>
       </div>
     </article>
 
-    <article class="section-card section--breach" id="guard-industry" data-target-stories="5" data-max-stories="8" data-empty-message="No new reportable events for today&#39;s briefing.">
+    <article class="section-card section--legal" id="lawsuits">
       <div class="section-head">
         <div class="section-head__bar"></div>
         <div class="section-head__icon">
-          <svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><circle cx="12" cy="10" r="3"/><path d="M8 17c1.1-2 6.9-2 8 0"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 3v18M8 6l-4 6h8zm8 0l-4 6h8zM3 17h7m4 0h7"/></svg>
         </div>
         <div class="section-head__text">
-          <div class="section-head__title">Healthcare &amp; University Security Guard Industry</div>
-          <div class="section-head__sub">Staffing · licensing · training · de-escalation · use of force · contract trends</div>
+          <h2 class="section-head__title">Healthcare Violence Law &amp; Regulation</h2>
+          <div class="section-head__sub">OSHA activity · lawsuits · bills · staffing/security mandates · union actions</div>
         </div>
-        <div class="section-head__count">5 stories</div>
+        <div class="section-head__count">4 stories</div>
       </div>
 
       
       <div class="story">
         <div class="story__meta">
-          <span class="tag tag--critical">Critical</span>
+          <span class="tag tag--new">New</span>
           <span class="story__source">Office of the Governor of Virginia</span>
-          <span class="story__time">7 days ago</span>
+          <span class="story__time">June 4, 2026</span>
         </div>
-        <h2 class="story__title">Virginia signs law banning weapons in hospitals providing mental health/developmental services</h2>
-        <p class="story__body">Virginia enacted HB 229/SB 173, prohibiting firearms and other dangerous weapons in hospitals that provide mental health and developmental services. For hospital security leaders, this resets the baseline for weapons policies, signage, screening, and coordination with local law enforcement. Security contractors should anticipate contract amendments to reflect enforcement requirements, visitor screening postures, and staff training updates. Compliance teams will need to verify policy alignment and incident documentation to support prosecutions. The law may also affect use-of-force decision trees and de-escalation priorities at ED entrances and behavioral health units. Plan now for communications, patient/visitor notification, and procedures for exceptions (e.g., law enforcement). ([governor.virginia.gov](https://www.governor.virginia.gov/newsroom/news-releases/2026/june-releases/name-1119198-en.html?utm_source=openai))</p>
+        <h3 class="story__title">Virginia enacts ban on firearms and other weapons in hospitals providing mental health and developmental services</h3>
+        <p class="story__body">Governor Abigail Spanberger signed HB 229 and SB 173 to prohibit firearms and other dangerous weapons inside medical facilities that provide mental health and developmental services. The move gives hospitals a clearer statutory basis to keep weapons out beyond facility policy alone, reducing ambiguity for security personnel and law enforcement. For security and compliance teams, the law necessitates updates to signage, screening protocols, visitor policies, and training before enforcement begins. University health systems and behavioral health providers should review how the ban integrates with threat assessment procedures, emergency management plans, and patient rights statutes. Investigations units should align evidence-handling and incident documentation practices with the new criminal prohibitions to support prosecutions when violations occur.</p>
         <div class="story__footer">
           <span class="cross-ref">
             <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
-            Also relevant to: policy, hospital-operations
+            Also relevant to: security, compliance
           </span>
           <a href="https://www.governor.virginia.gov/newsroom/news-releases/2026/june-releases/name-1119198-en.html" class="source-link" target="_blank" rel="noopener noreferrer">Read source <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
         </div>
@@ -1447,80 +1473,83 @@
       <div class="story">
         <div class="story__meta">
           <span class="tag tag--update">Update</span>
-          <span class="story__source">North Carolina eVP (State procurement portal)</span>
-          <span class="story__time">1 day ago</span>
+          <span class="story__source">KTVU FOX 2 (Bay Area)</span>
+          <span class="story__time">June 8, 2026</span>
         </div>
-        <h2 class="story__title">UNC Wilmington closes competition for residence-life security guard services</h2>
-        <p class="story__body">UNCW’s RFP 72-PPBW26082 for security guard services in Housing &amp; Residence Life closed June 10. The solicitation seeks up to 11 guard posts (including a new dorm in Fall 2027), requires certified guards, a site manager and supervisor, specifies training/background checks, and sets a minimum $17/hr wage. The university’s current guard contract with Defender Services expires July 31, 2026, signaling a summer award and transition window. Guard firms should prepare for residence-hall coverage models, break/special-event schedules, and integration with university emergency response. For campus safety administrators, the RFP details are a useful benchmark for post staffing, supervision ratios, and wage floors. ([evp.nc.gov](https://evp.nc.gov/_entity/annotation/00bea412-b352-f111-bec6-001dd80bcb64/863ea987-6d3e-ed11-9daf-001dd805ec0b?t=1779062400292&amp;utm_source=openai))</p>
+        <h3 class="story__title">Cal/OSHA fines SF General and UCSF over workplace-violence failures tied to fatal employee stabbing</h3>
+        <p class="story__body">Cal/OSHA issued proposed penalties exceeding $130,000 to Zuckerberg San Francisco General Hospital and to UCSF after finding deficiencies in workplace-violence prevention, including identifying, investigating, and managing potentially dangerous patients. The enforcement action follows the December 2025 fatal stabbing of a hospital social worker and highlights California’s long-standing healthcare-specific violence-prevention standard. For hospital security and compliance leads, the case underscores the need for timely incident reporting to Cal/OSHA, accurate violence-incident logs, documented hazard assessments, and corrective actions. University medical centers should confirm coordination across campus police, emergency departments, outpatient clinics, and HR to ensure enterprise-wide adherence and defensible documentation should regulators seek records during an investigation.</p>
         <div class="story__footer">
           <span class="cross-ref">
             <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
-            Also relevant to: contracting, campus-operations
+            Also relevant to: security, investigation, compliance
           </span>
-          <a href="https://evp.nc.gov/solicitations/details/?id=d271adf4-b252-f111-bec6-001dd80bcb64" class="source-link" target="_blank" rel="noopener noreferrer">Read source <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+          <a href="https://www.ktvu.com/news/sf-general-hospital-ucsf-fined-cal-osha-worker-violations-connected-deadly-stabbing" class="source-link" target="_blank" rel="noopener noreferrer">Read source <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
         </div>
       </div>
 
       <div class="story">
         <div class="story__meta">
           <span class="tag tag--update">Update</span>
-          <span class="story__source">IACLEA</span>
-          <span class="story__time">today</span>
+          <span class="story__source">Massachusetts Health &amp; Hospital Association</span>
+          <span class="story__time">June 1, 2026</span>
         </div>
-        <h2 class="story__title">IACLEA holds annual business meeting/candidate forum; Clery Act trainings begin June 15</h2>
-        <p class="story__body">IACLEA—the leading association for campus public safety—hosts its Annual Business Meeting and Candidate Forum today (June 11), with partner trainings on the Clery Act and a Clery Compliance Academy starting June 15. For university police/security leaders, these sessions shape emerging priorities, including staffing, compliance, and de‑escalation/response policy. Participation can inform upcoming policy revisions, training requirements for officers and non‑sworn security, and cross‑department coordination (housing, student affairs, legal). These events precede the IACLEA Annual Conference (June 25–28, Orlando) featuring 45+ breakouts and vendor expo—useful for benchmarking guard force models, technology adoption, and contracting strategies before FY26–27 procurements. ([iaclea.org](https://iaclea.org/?utm_source=openai))</p>
+        <h3 class="story__title">Massachusetts Senate urged to act on House-passed hospital workplace violence prevention bill (H.4767/S.1718)</h3>
+        <p class="story__body">MHA reports the Senate is considering comprehensive workplace-violence legislation already passed unanimously by the House. The bill would require every hospital to conduct facility-specific risk assessments, implement tailored prevention programs, engage frontline staff in plan development and training, and make written plans available to employees and labor organizations. Enforcement would be tied to state licensure and reporting requirements. For compliance and security directors, this signals likely near-term obligations around risk assessment methodologies, joint labor–management safety committees, documentation standards, and training curricula. University-affiliated hospitals should prepare to align campus security, hospital administration, and labor relations to meet program transparency and workforce-participation provisions if the measure becomes law.</p>
         <div class="story__footer">
           <span class="cross-ref">
             <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
-            Also relevant to: compliance, training
+            Also relevant to: security, staffing, compliance
           </span>
-          <a href="https://iaclea.org/" class="source-link" target="_blank" rel="noopener noreferrer">Read source <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
-        </div>
-      </div>
-
-      <div class="story">
-        <div class="story__meta">
-          <span class="tag tag--update">Update</span>
-          <span class="story__source">SAMDaily.us (VA presolicitation)</span>
-          <span class="story__time">6 days ago</span>
-        </div>
-        <h2 class="story__title">VA VISN 5 seeks third‑party monitoring/support for physical security systems</h2>
-        <p class="story__body">The Department of Veterans Affairs (VISN 5) posted a presolicitation on June 5 for third‑party monitoring, protection, and support subscriptions covering physical security systems at its Elkridge Landing office, with a base year starting June 30, 2026 and four option years. While not a hospital ward contract, the scope reflects how major U.S. healthcare networks are centralizing SOC functions and outsourcing specialized monitoring. Security integrators and guard service partners should anticipate tighter integration between access control, alarms, and incident workflows, with SLAs, uptime, and reporting requirements impacting on‑site officer post orders and escalation protocols. ([fbodaily.com](https://www.fbodaily.com/archive/2026/06-June/05-Jun-2026/FBO-07838451.htm?utm_source=openai))</p>
-        <div class="story__footer">
-          <span class="cross-ref">
-            <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
-            Also relevant to: hospital-operations, contracting
-          </span>
-          <a href="https://www.fbodaily.com/archive/2026/06-June/05-Jun-2026/FBO-07838451.htm" class="source-link" target="_blank" rel="noopener noreferrer">Read source <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+          <a href="https://www.mhalink.org/news/mondayreport/jun-1-2026/" class="source-link" target="_blank" rel="noopener noreferrer">Read source <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
         </div>
       </div>
 
       <div class="story">
         <div class="story__meta">
           <span class="tag tag--watch">Watch</span>
-          <span class="story__source">Security Magazine</span>
-          <span class="story__time">6 days ago</span>
+          <span class="story__source">AHA (ASHRM)</span>
+          <span class="story__time">June 5, 2026</span>
         </div>
-        <h2 class="story__title">3 hospital security guards assaulted at Alabama ER highlights frontline risks</h2>
-        <p class="story__body">Security Magazine reports a June 5 incident where three security officers at Jackson Hospital (Montgomery, AL) were assaulted while responding to an agitated patient in the ER; the suspect was arrested and charged. For hospital security leaders and contractors, this underscores continuing exposure to patient‑/visitor‑on‑staff violence and the need to validate officer training in crisis communication, safe team approaches, defensive tactics, weapons‑retention (if armed), and rapid handoff to police. It also reinforces reviewing staffing levels at EDs, incident reporting, and after‑action learning loops. Consider tying this to policy refreshers following new state‑level hospital weapons restrictions and workplace‑violence mandates. ([securitymagazine.com](https://www.securitymagazine.com/articles/102348-3-hospital-security-guards-assaulted))</p>
+        <h3 class="story__title">AHA’s #HAVhope highlights push for federal protections, including criminal penalties for assaults on hospital workers</h3>
+        <p class="story__body">The American Hospital Association’s #HAVhope awareness day spotlighted policy efforts to prevent workplace violence in healthcare, including advocacy for federal legislation to make assaulting hospital workers a federal crime. While not a regulatory change by itself, the initiative signals growing national momentum for stronger legal protections, which could influence federal or state policy. Security and compliance leaders should track how these proposals might interact with OSHA’s General Duty Clause enforcement and any forthcoming federal standards. University and system leaders can use the campaign to benchmark existing threat management, staff training, and incident-reporting frameworks against emerging expectations from national associations and potential future statutory mandates.</p>
         <div class="story__footer">
           <span class="cross-ref">
             <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
-            Also relevant to: training, use-of-force-policy
+            Also relevant to: security, compliance
           </span>
-          <a href="https://www.securitymagazine.com/articles/102348-3-hospital-security-guards-assaulted" class="source-link" target="_blank" rel="noopener noreferrer">Read source <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+          <a href="https://www.ashrm.org/node/710240" class="source-link" target="_blank" rel="noopener noreferrer">Read source <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
         </div>
       </div>
     </article>
 
-    <article class="section-card section--security" id="best-practices" data-target-stories="5" data-max-stories="8" data-empty-message="No new reportable events for today&#39;s briefing.">
+    <article class="section-card section--breach" id="guard-industry">
+      <div class="section-head">
+        <div class="section-head__bar"></div>
+        <div class="section-head__icon">
+          <svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><circle cx="12" cy="10" r="3"/><path d="M8 17c1.1-2 6.9-2 8 0"/></svg>
+        </div>
+        <div class="section-head__text">
+          <h2 class="section-head__title">Healthcare &amp; University Security Guard Industry</h2>
+          <div class="section-head__sub">Staffing · licensing · training · de-escalation · use of force · contract trends</div>
+        </div>
+        <div class="section-head__count">0 stories</div>
+      </div>
+
+      
+      <div class="empty-state">
+        <strong>No new reportable events</strong>
+        <span>Nothing in this coverage area met today&#39;s inclusion criteria. Monitoring continues for the next edition.</span>
+      </div>
+    </article>
+
+    <article class="section-card section--security" id="best-practices">
       <div class="section-head">
         <div class="section-head__bar"></div>
         <div class="section-head__icon">
           <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
         </div>
         <div class="section-head__text">
-          <div class="section-head__title">Security Best Practices &amp; Trends</div>
+          <h2 class="section-head__title">Security Best Practices &amp; Trends</h2>
           <div class="section-head__sub">Visitor management · weapons screening · panic buttons · body cameras · AI video analytics</div>
         </div>
         <div class="section-head__count">0 stories</div>
@@ -1529,21 +1558,21 @@
       
       <div class="empty-state">
         <strong>No new reportable events</strong>
-        <span>No new reportable events for today&#39;s briefing.</span>
+        <span>Nothing in this coverage area met today&#39;s inclusion criteria. Monitoring continues for the next edition.</span>
       </div>
     </article>
 
-    <article class="section-card section--trafficking" id="human-trafficking" data-target-stories="5" data-max-stories="8" data-empty-message="No new reportable events for today&#39;s briefing.">
+    <article class="section-card section--trafficking" id="human-trafficking">
       <div class="section-head">
         <div class="section-head__bar"></div>
         <div class="section-head__icon">
           <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M16.5 16.5L21 21"/><path d="M8 11h6M11 8v6"/></svg>
         </div>
         <div class="section-head__text">
-          <div class="section-head__title">Human Trafficking Intelligence</div>
+          <h2 class="section-head__title">Human Trafficking Intelligence</h2>
           <div class="section-head__sub">US focus · sex &amp; labor trafficking · healthcare, universities, hotels, cases, laws, findings</div>
         </div>
-        <div class="section-head__count">5 stories</div>
+        <div class="section-head__count">6 stories</div>
       </div>
 
       <div class="trend-watch">
@@ -1554,109 +1583,125 @@
         <div class="trend-grid">
           <div class="trend-card">
             <div class="trend-card__label">United States</div>
-            <div class="trend-card__value">29,272 signals (nationwide hotline contacts) in 2023</div>
-            <div class="trend-card__sub">7,169 signals were from victims/survivors (2023). National Human Trafficking Hotline.</div>
+            <div class="trend-card__value">11,999</div>
+            <div class="trend-card__sub">Cases identified in 2024 · 21,865 victims · 32,309 hotline signals. Reports/detections, not total prevalence.</div>
             <div class="trend-bar"><span class="trend-bar__fill" style="--bar-value: 100%"></span></div>
           </div>
-<div class="trend-card">
+          <div class="trend-card">
             <div class="trend-card__label">New York</div>
-            <div class="trend-card__value">1,191 signals; 570 cases identified (2023)</div>
-            <div class="trend-card__sub">Share of U.S. total: ~4% of signals (2023). National Human Trafficking Hotline.</div>
-            <div class="trend-bar"><span class="trend-bar__fill" style="--bar-value: 4%"></span></div>
+            <div class="trend-card__value">570</div>
+            <div class="trend-card__sub">Cases identified in 2024 · 1,437 victims · 1,191 signals. Bar shows share of U.S. cases (4.8%).</div>
+            <div class="trend-bar"><span class="trend-bar__fill" style="--bar-value: 4.8%"></span></div>
           </div>
-<div class="trend-card">
+          <div class="trend-card">
             <div class="trend-card__label">Worldwide</div>
-            <div class="trend-card__value">202,478 detected victims (2020–2023 period)</div>
-            <div class="trend-card__sub">Detected victims compiled from official data; not directly comparable to U.S. hotline signals.</div>
-            <div class="trend-bar"><span class="trend-bar__fill" style="--bar-value: 62%"></span></div>
+            <div class="trend-card__value">202,478</div>
+            <div class="trend-card__sub">Detected victims, 2020–2023 aggregate (UNODC GLOTIP 2024). Different metric and period — not shown as a bar.</div>
           </div>
         </div>
         <div class="trend-watch__source">
-          Sources refreshed by generator: <a href="https://humantraffickinghotline.org/en/statistics" target="_blank" rel="noopener noreferrer">National Human Trafficking Hotline</a> · <a href="https://humantraffickinghotline.org/en/statistics" target="_blank" rel="noopener noreferrer">National Human Trafficking Hotline</a> · <a href="https://www.unodc.org/documents/data-and-analysis/glotip/2024/GLOTIP24_special_points_final.pdf" target="_blank" rel="noopener noreferrer">UNODC Global Report on Trafficking in Persons 2024</a>
+          Sources refreshed by generator: <a href="https://humantraffickinghotline.org/en/statistics" target="_blank" rel="noopener noreferrer">National Human Trafficking Hotline</a> · <a href="https://humantraffickinghotline.org/en/statistics/new-york" target="_blank" rel="noopener noreferrer">National Human Trafficking Hotline — New York</a> · <a href="https://www.unodc.org/documents/data-and-analysis/glotip/2024/GLOTIP24_special_points_final.pdf" target="_blank" rel="noopener noreferrer">UNODC</a>
         </div>
       </div>
       <div class="story">
         <div class="story__meta">
           <span class="tag tag--new">New</span>
-          <span class="story__source">New York State Attorney General</span>
-          <span class="story__time">June 10, 2026</span>
+          <span class="story__source">U.S. Department of Justice — USAO Middle District of Florida</span>
+          <span class="story__time">June 9, 2026</span>
         </div>
-        <h2 class="story__title">NY Attorney General reminds hotels of anti-trafficking posting and vigilance ahead of FIFA World Cup</h2>
-        <p class="story__body">With large international crowds arriving for FIFA World Cup matches in the New York region beginning June 13, Attorney General Letitia James issued a reminder to hotels, motels, inns, and other lodging facilities to meet New York’s legal requirements to post human trafficking information cards and hotline resources in visible locations and to heighten diligence. The AG’s letter went to 10 trade associations across the state’s hospitality and tourism sectors. The guidance underscores known trafficking risks associated with spikes in hospitality demand, temporary labor, transportation, and nightlife. Why it matters: security and compliance teams in hospitality must verify required postings, refresh staff training, and coordinate reporting procedures; investigators and local police gain a window to increase proactive outreach and spot-checks at high-risk venues during the tournament period.</p>
+        <h3 class="story__title">RICO defendant sentenced for coercing H‑2A farmworkers in multi-state forced labor scheme</h3>
+        <p class="story__body">DOJ announced a 70‑month federal sentence and restitution in a racketeering conspiracy that used fraud and coercion to compel the labor of Mexican H‑2A agricultural workers across multiple states between 2015 and 2017. Tactics included debt imposition, passport confiscation, threats of deportation and harm to families, and degrading living conditions. The case stems from the Los Villatoros Harvesting (LVH) enterprise, with several co‑defendants previously sentenced. Why it matters: For compliance and supply‑chain risk teams, this underscores enforcement exposure tied to agricultural labor subcontractors; for investigators, it details indicators of coercion (document seizure, isolation, debt) useful for victim identification; for corporate security and ESG leads, it highlights liability where farm labor contractors are used without rigorous vetting and monitoring.</p>
         <div class="story__footer">
           <span class="cross-ref">
             <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
-            Also relevant to: Travel risk, Hotels &amp; Hospitality
+            Also relevant to: supply-chain, agriculture, investigations
           </span>
-          <a href="https://ag.ny.gov/press-release/2026/attorney-general-james-reminds-new-york-hotels-help-prevent-human-trafficking" class="source-link" target="_blank" rel="noopener noreferrer">Read source <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+          <a href="https://www.justice.gov/usao-mdfl/pr/illegal-alien-sentenced-multi-state-racketeering-conspiracy-involving-forced-labor" class="source-link" target="_blank" rel="noopener noreferrer">Read source <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+        </div>
+      </div>
+
+      <div class="story">
+        <div class="story__meta">
+          <span class="tag tag--new">New</span>
+          <span class="story__source">U.S. Department of Justice — SDNY</span>
+          <span class="story__time">June 8, 2026</span>
+        </div>
+        <h3 class="story__title">Manhattan indictment: &#39;Foot fetish&#39; company owner charged with sex trafficking scheme using hotel rooms</h3>
+        <p class="story__body">Federal prosecutors in the Southern District of New York unsealed a three‑count indictment alleging a New York man lured victims with offers of paid “foot modeling” work, then sexually assaulted and trafficked them in hotel rooms. The FBI‑NYPD Human Trafficking Task Force led the investigation. Why it matters: For hotel security and hospitality compliance, the case reinforces the need for staff training on trafficking indicators (room traffic, payment methods, guest control dynamics) and rapid reporting protocols; for campus and youth‑serving organizations, it illustrates grooming via false job offers; for investigators, it shows the value of task force coordination and evidence collection in hospitality venues.</p>
+        <div class="story__footer">
+          <span class="cross-ref">
+            <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
+            Also relevant to: hotels-hospitality, university, investigations
+          </span>
+          <a href="https://www.justice.gov/usao-sdny/pr/jason-khan-owner-foot-fetish-company-charged-manhattan-federal-court-sex-trafficking" class="source-link" target="_blank" rel="noopener noreferrer">Read source <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
         </div>
       </div>
 
       <div class="story">
         <div class="story__meta">
           <span class="tag tag--update">Update</span>
-          <span class="story__source">U.S. Department of Justice Office of Inspector General</span>
-          <span class="story__time">last week</span>
+          <span class="story__source">U.S. Department of Justice — Office of Public Affairs</span>
+          <span class="story__time">June 9, 2026</span>
         </div>
-        <h2 class="story__title">DOJ OIG semiannual report adds anti-trafficking code-of-conduct tracking; 11 complaints logged this period</h2>
-        <p class="story__body">DOJ’s Inspector General released its Semiannual Report to Congress (covering Oct 1, 2025–Mar 31, 2026), which now includes an Anti‑Human Trafficking Code of Conduct reporting section mandated by the Trafficking Victims Prevention and Protection Reauthorization Act of 2022. The OIG reports 11 complaints related to human trafficking allegations during the period; one complaint progressed to an OIG investigation that is in judicial proceedings. While no new recommendations were issued this cycle, the OIG affirmed it will continue tracking suspected violations and program integrity issues. Why it matters: compliance officers and grantees handling DOJ funds should ensure training, reporting mechanisms, and documentation align with federal anti‑trafficking code‑of‑conduct requirements; investigators gain visibility into federal oversight signals that may trigger audits or referrals.</p>
+        <h3 class="story__title">Trinitarios indictment tied to Homeland Security Task Force efforts; DOJ notes focus includes child trafficking</h3>
+        <p class="story__body">DOJ announced a sweeping RICO indictment of 26 alleged Trinitarios members in Massachusetts following a multijurisdictional probe supported by a Homeland Security Task Force (HSTF). While charges emphasize violent crime and narcotics, DOJ’s release highlights HSTF’s mandate to dismantle cartels and transnational networks involved in human smuggling and trafficking—particularly offenses involving children. Why it matters: For law enforcement and campus safety, the update signals continued use of HSTFs to disrupt TCOs whose portfolios can include trafficking; for policymakers and compliance officers, it indicates interagency priorities that blend gang, drug, weapons, and trafficking investigations, informing resource planning and interop MOUs.</p>
         <div class="story__footer">
           <span class="cross-ref">
             <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
-            Also relevant to: Compliance, Policy &amp; Oversight
+            Also relevant to: task-forces, policy
           </span>
-          <a href="https://oig.justice.gov/sites/default/files/semiannual-reports/2026SpringSARC.pdf" class="source-link" target="_blank" rel="noopener noreferrer">Read source <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+          <a href="https://www.justice.gov/opa/pr/twenty-six-trinitarios-gang-members-charged-rico-conspiracy-related-five-murders-after" class="source-link" target="_blank" rel="noopener noreferrer">Read source <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
         </div>
       </div>
 
       <div class="story">
         <div class="story__meta">
-          <span class="tag tag--new">New</span>
-          <span class="story__source">FBI</span>
+          <span class="tag tag--update">Update</span>
+          <span class="story__source">U.S. Department of Justice — District of Maryland</span>
+          <span class="story__time">June 4, 2026</span>
+        </div>
+        <h3 class="story__title">Maryland defendant sentenced to 17.5 years for child sex trafficking and child sexual exploitation</h3>
+        <p class="story__body">A federal court in Maryland sentenced a 27‑year‑old to 17½ years’ imprisonment and 15 years’ supervised release for sex trafficking a child, sexually exploiting a child, and distributing child sexual abuse material. Why it matters: For healthcare and school‑based professionals, the case underscores mandatory reporting and trauma‑informed response protocols; for investigators, it highlights digital evidence workflows (CSAM distribution alongside trafficking) and the importance of multi‑agency task forces. For corporate trust &amp; safety teams, it signals continuing exposure where platforms are used to recruit or distribute exploitative content, reinforcing the need for robust KYC/abuse detection and preservation orders.</p>
+        <div class="story__footer">
+          <span class="cross-ref">
+            <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
+            Also relevant to: healthcare-identification, digital-safety
+          </span>
+          <a href="https://www.justice.gov/usao-md/pr/aberdeen-woman-sentenced-child-sexual-exploitation-crimes" class="source-link" target="_blank" rel="noopener noreferrer">Read source <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+        </div>
+      </div>
+
+      <div class="story">
+        <div class="story__meta">
+          <span class="tag tag--update">Update</span>
+          <span class="story__source">U.S. Department of Justice — District of Massachusetts</span>
           <span class="story__time">June 5, 2026</span>
         </div>
-        <h2 class="story__title">FBI ‘Inside the FBI’ episode spotlights investigating crimes against children and human trafficking</h2>
-        <p class="story__body">The FBI released a new episode of its ‘Inside the FBI: My Mission’ miniseries focused on investigating crimes against children and human trafficking. The discussion covers the Bureau’s victim-centered, trauma‑informed practices, interagency coordination, and referral pathways, and directs listeners to reporting resources, including the National Human Trafficking Hotline and NCMEC CyberTipline. Why it matters: investigators, campus safety, and healthcare professionals can leverage the episode’s practical insights and resource links to refine screening, documentation, and referral protocols; corporate security and privacy teams should ensure appropriate handling of victim data when liaising with law enforcement and hotlines.</p>
+        <h3 class="story__title">Massachusetts sex trafficker also convicted of producing child sexual abuse material</h3>
+        <p class="story__body">DOJ reported that a Massachusetts defendant—previously convicted (Jan. 2026) of sex trafficking of a child and related offenses—was also convicted of producing child sexual abuse material. Why it matters: For investigators and prosecutors, the case illustrates strategic charging that pairs trafficking counts with production offenses, increasing sentencing exposure and leverage for victim‑centered outcomes. For campus safety and youth‑program leaders, it reinforces risk tied to online grooming and transportation of minors. For privacy and compliance teams, it underscores retention and lawful disclosure practices for platforms that may hold critical evidence in cross‑jurisdictional child‑exploitation/trafficking cases.</p>
         <div class="story__footer">
           <span class="cross-ref">
             <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
-            Also relevant to: Investigator Best Practices, Healthcare victim ID
+            Also relevant to: investigations, digital-safety
           </span>
-          <a href="https://www.fbi.gov/audio-repository/inside-the-fbi-podcast-my-mission-miniseries-investigating-crimes-against-children-and-human-trafficking-060526.mp3/view" class="source-link" target="_blank" rel="noopener noreferrer">Read source <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
-        </div>
-      </div>
-
-      <div class="story">
-        <div class="story__meta">
-          <span class="tag tag--update">Update</span>
-          <span class="story__source">ACF/HHS Title IV‑E Prevention Services Clearinghouse</span>
-          <span class="story__time">updated this week</span>
-        </div>
-        <h2 class="story__title">HHS Prevention Services Clearinghouse reaches 222 reviewed programs; latest reviews finalized June 2026</h2>
-        <p class="story__body">The HHS Title IV‑E Prevention Services Clearinghouse reports it has reviewed 222 programs, with 102 rated promising, supported, or well‑supported as of June 2026. Recent entries (last reviewed June 2026) include updates to youth transition and behavioral‑health models relevant to populations at elevated trafficking risk (e.g., foster, runaway, and vulnerable youth). Why it matters: healthcare, university, and social‑services leaders can use these evidence ratings to select upstream prevention and stabilization programs that reduce trafficking vulnerability and improve cross‑system coordination; compliance teams can tie program choices to federal evidence standards under the Family First Prevention Services Act.</p>
-        <div class="story__footer">
-          <span class="cross-ref">
-            <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
-            Also relevant to: Prevention, Youth &amp; Campus
-          </span>
-          <a href="https://preventionservices.acf.hhs.gov/" class="source-link" target="_blank" rel="noopener noreferrer">Read source <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+          <a href="https://www.justice.gov/usao-ma/pr/sex-trafficker-convicted-producing-child-pornography" class="source-link" target="_blank" rel="noopener noreferrer">Read source <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
         </div>
       </div>
 
       <div class="story">
         <div class="story__meta">
           <span class="tag tag--watch">Watch</span>
-          <span class="story__source">New York State Office for the Prevention of Domestic Violence</span>
-          <span class="story__time">June 9, 2026</span>
+          <span class="story__source">FBI</span>
+          <span class="story__time">June 5, 2026</span>
         </div>
-        <h2 class="story__title">NY OPDV training spotlights sexual violence and trafficking within LGBTQI+ communities</h2>
-        <p class="story__body">New York’s Office for the Prevention of Domestic Violence hosted a June 9 training that examines sexual violence and trafficking dynamics within LGBTQI+ communities, including unique coercive tactics and tailored support and referral strategies. The session is open to broad practitioner audiences and emphasizes survivor‑centered, trauma‑informed responses. Why it matters: healthcare providers, campus staff, victim advocates, and investigators can incorporate identity‑affirming screening questions, safety planning, and referral workflows to improve detection and reduce barriers to reporting for LGBTQI+ survivors during high‑traffic summer events and beyond.</p>
+        <h3 class="story__title">FBI podcast details victim-centered human trafficking operations and CAC/HT section priorities</h3>
+        <p class="story__body">An Inside the FBI “My Mission” episode profiles the Bureau section chief overseeing Violent Crimes Against Children and Human Trafficking, outlining partnerships, reporting pathways, and victim‑centered practices. Why it matters: For law enforcement and healthcare teams, this offers current insights on interagency coordination, survivor‑first approaches, and how to route tips (including CAC units and human trafficking squads). For university leaders and corporate security, it’s a compact primer on indicators, reporting channels, and what to expect when engaging with federal partners—useful for refining internal SOPs and training content.</p>
         <div class="story__footer">
           <span class="cross-ref">
             <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
-            Also relevant to: Healthcare victim ID, University &amp; Campus
+            Also relevant to: investigator-best-practices, healthcare-identification, university
           </span>
-          <a href="https://opdv.ny.gov/event/gbv-lgbtqi-communities-pt-2-june-9-2026" class="source-link" target="_blank" rel="noopener noreferrer">Read source <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+          <a href="https://www.fbi.gov/audio-repository/inside-the-fbi-podcast-my-mission-miniseries-investigating-crimes-against-children-and-human-trafficking-060526.mp3/view" class="source-link" target="_blank" rel="noopener noreferrer">Read source <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
         </div>
       </div>
     </article>
@@ -1674,17 +1719,17 @@
         <a href="#hipaa" class="toc-link">
           <div class="toc-dot" style="background: var(--c-hipaa)"></div>
           <span class="toc-link__label">HIPAA / Privacy</span>
-          <span class="toc-link__count">2</span>
+          <span class="toc-link__count">0</span>
         </a>
         <a href="#lawsuits" class="toc-link">
           <div class="toc-dot" style="background: var(--c-legal)"></div>
           <span class="toc-link__label">Violence Law &amp; Regulation</span>
-          <span class="toc-link__count">0</span>
+          <span class="toc-link__count">4</span>
         </a>
         <a href="#guard-industry" class="toc-link">
           <div class="toc-dot" style="background: var(--c-breach)"></div>
           <span class="toc-link__label">Guard Industry</span>
-          <span class="toc-link__count">5</span>
+          <span class="toc-link__count">0</span>
         </a>
         <a href="#best-practices" class="toc-link">
           <div class="toc-dot" style="background: var(--c-security)"></div>
@@ -1694,25 +1739,25 @@
         <a href="#human-trafficking" class="toc-link">
           <div class="toc-dot" style="background: var(--c-trafficking)"></div>
           <span class="toc-link__label">Human Trafficking</span>
-          <span class="toc-link__count">5</span>
+          <span class="toc-link__count">6</span>
         </a>
       </div>
     </div>
 
     <div class="sidebar-card">
-      <div class="sidebar-card__header">Today's critical alerts</div>
+      <div class="sidebar-card__header">Today's top alerts</div>
       <div class="sidebar-card__body">
         <div class="alert-item">
           <div class="alert-dot" style="background: var(--c-violence)"></div>
-          <div class="alert-item__text"><strong>Healthcare Violence:</strong> Cal/OSHA issues hefty fine to UCSF/Zuckerberg SF General after fatal workplace stabbing</div>
+          <div class="alert-item__text"><strong>Healthcare Violence:</strong> Cal/OSHA fines San Francisco General and UCSF over fatal clinic stabbing, cites WPV plan gaps</div>
         </div>
         <div class="alert-item">
-          <div class="alert-dot" style="background: var(--c-breach)"></div>
-          <div class="alert-item__text"><strong>Guard Industry:</strong> Virginia signs law banning weapons in hospitals providing mental health/developmental services</div>
+          <div class="alert-dot" style="background: var(--c-violence)"></div>
+          <div class="alert-item__text"><strong>Healthcare Violence:</strong> Travel nurse charged with sexually assaulting ER patient at Missouri hospital</div>
         </div>
         <div class="alert-item">
           <div class="alert-dot" style="background: var(--c-trafficking)"></div>
-          <div class="alert-item__text"><strong>Human Trafficking:</strong> NY Attorney General reminds hotels of anti-trafficking posting and vigilance ahead of FIFA World Cup</div>
+          <div class="alert-item__text"><strong>Human Trafficking:</strong> RICO defendant sentenced for coercing H‑2A farmworkers in multi-state forced labor scheme</div>
         </div>
       </div>
     </div>
@@ -1720,11 +1765,6 @@
     <div class="sidebar-card">
       <div class="sidebar-card__header">Past briefings</div>
       <div class="sidebar-card__body">
-        <a href="briefings/2026-06-10.html" class="archive-link">
-          <div class="toc-dot" style="background: var(--text3); opacity: 0.5"></div>
-          <span class="archive-link__label">Wednesday, June 10, 2026</span>
-          <span class="archive-link__arrow">→</span>
-        </a>
         <a href="briefings/2026-06-09.html" class="archive-link">
           <div class="toc-dot" style="background: var(--text3); opacity: 0.5"></div>
           <span class="archive-link__label">Tuesday, June 9, 2026</span>
@@ -1745,18 +1785,15 @@
           <span class="archive-link__label">Friday, June 5, 2026</span>
           <span class="archive-link__arrow">→</span>
         </a>
+        <a href="briefings/2026-06-04.html" class="archive-link">
+          <div class="toc-dot" style="background: var(--text3); opacity: 0.5"></div>
+          <span class="archive-link__label">Thursday, June 4, 2026</span>
+          <span class="archive-link__arrow">→</span>
+        </a>
       </div>
     </div>
   </aside>
 </main>
-
-<template id="empty-section-template">
-  <div class="empty-state">
-    <strong>No new reportable events</strong>
-    <span>No new reportable events for today's briefing.</span>
-  </div>
-</template>
-
 
 <!-- ============================================================
      FOOTER
@@ -1767,8 +1804,7 @@
       <strong style="color: var(--text2);">SecOwl Inc. Intelligence Briefing</strong>
     </p>
     <p style="text-align: right;">
-      For situational awareness only. Not legal or medical advice. ·
-      <a href="#">Archive</a> · <a href="#">About</a>
+      For situational awareness only. Not legal or medical advice.
     </p>
   </div>
 </footer>
@@ -1776,41 +1812,52 @@
 <script>
   const themeToggle = document.querySelector('.theme-toggle');
   const printButton = document.querySelector('#print-button');
-  const briefingSectionRules = {
-    targetStories: 5,
-    maxStories: 8,
-    emptyMessage: "No new reportable events for today's briefing."
-  };
 
   function syncThemeButton(theme) {
     const nextTheme = theme === 'light' ? 'dark' : 'light';
     themeToggle.setAttribute('aria-label', `Switch to ${nextTheme} mode`);
-    themeToggle.setAttribute('aria-pressed', theme === 'light' ? 'true' : 'false');
+  }
+
+  function applyTheme(theme, persist) {
+    document.documentElement.dataset.theme = theme;
+    if (themeToggle) syncThemeButton(theme);
+    if (persist) {
+      try {
+        localStorage.setItem('briefing-theme', theme);
+      } catch (error) {
+        // Theme still changes for this session when storage is unavailable.
+      }
+    }
   }
 
   if (themeToggle) {
     syncThemeButton(document.documentElement.dataset.theme);
-
     themeToggle.addEventListener('click', () => {
-      const currentTheme = document.documentElement.dataset.theme;
-      const nextTheme = currentTheme === 'light' ? 'dark' : 'light';
-
-      document.documentElement.dataset.theme = nextTheme;
-      syncThemeButton(nextTheme);
-
-      try {
-        localStorage.setItem('briefing-theme', nextTheme);
-      } catch (error) {
-        // Theme still changes for this session when storage is unavailable.
-      }
+      const nextTheme = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
+      applyTheme(nextTheme, true);
     });
+  }
+
+  // Follow OS theme changes while the user has not picked a theme manually.
+  const lightQuery = window.matchMedia('(prefers-color-scheme: light)');
+  const onSchemeChange = (event) => {
+    let saved = null;
+    try {
+      saved = localStorage.getItem('briefing-theme');
+    } catch (error) {
+      saved = null;
+    }
+    if (!saved) applyTheme(event.matches ? 'light' : 'dark', false);
+  };
+  if (typeof lightQuery.addEventListener === 'function') {
+    lightQuery.addEventListener('change', onSchemeChange);
+  } else if (typeof lightQuery.addListener === 'function') {
+    lightQuery.addListener(onSchemeChange);
   }
 
   if (printButton) {
     printButton.addEventListener('click', () => window.print());
   }
-
-  window.briefingSectionRules = briefingSectionRules;
 </script>
 </body>
 </html>
